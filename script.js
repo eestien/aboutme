@@ -26,13 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-    // Add hover effect to experience items
-    document.querySelectorAll('.experience-item').forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            item.style.transform = 'translateX(10px)';
-        });
-        item.addEventListener('mouseleave', () => {
-            item.style.transform = 'translateX(0)';
-        });
-    });
+    // Hover effect removed
 });
