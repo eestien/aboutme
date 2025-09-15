@@ -6,13 +6,13 @@
 
 /* CSS Custom Properties for Pixel-Neo-Tech Design System */
 :root {
-  /* Cyberpunk Neon Colors */
-  --color-neon-cyan: #00ffff;
-  --color-neon-pink: #ff00ff;
-  --color-neon-green: #00ff00;
-  --color-neon-orange: #ff8800;
-  --color-neon-purple: #8800ff;
-  --color-neon-blue: #0088ff;
+  /* Softened cyberpunk colors for better readability */
+  --color-neon-cyan: #4dd0e1;
+  --color-neon-pink: #f48fb1;
+  --color-neon-green: #81c784;
+  --color-neon-orange: #ffb74d;
+  --color-neon-purple: #ba68c8;
+  --color-neon-blue: #64b5f6;
 
   /* Dark Tech Background Colors */
   --color-bg-primary: #0a0a0a;
@@ -20,10 +20,10 @@
   --color-bg-tertiary: #2a2a2a;
   --color-bg-card: #151515;
 
-  /* Text Colors */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #cccccc;
-  --color-text-muted: #888888;
+  /* Improved text colors for better contrast */
+  --color-text-primary: #e8eaf6;
+  --color-text-secondary: #b0bec5;
+  --color-text-muted: #78909c;
   --color-text-accent: var(--color-neon-cyan);
 
   /* Pixel Grid */
@@ -34,11 +34,11 @@
   --font-family-primary: "Orbitron", monospace;
   --font-family-mono: "Share Tech Mono", monospace;
 
-  /* Neon Glow Effects */
-  --glow-cyan: 0 0 5px var(--color-neon-cyan), 0 0 10px var(--color-neon-cyan), 0 0 15px var(--color-neon-cyan);
-  --glow-pink: 0 0 5px var(--color-neon-pink), 0 0 10px var(--color-neon-pink), 0 0 15px var(--color-neon-pink);
-  --glow-green: 0 0 5px var(--color-neon-green), 0 0 10px var(--color-neon-green), 0 0 15px var(--color-neon-green);
-  --glow-orange: 0 0 5px var(--color-neon-orange), 0 0 10px var(--color-neon-orange), 0 0 15px var(--color-neon-orange);
+  /* Reduced glow intensity for calmer effect */
+  --glow-cyan: 0 0 3px var(--color-neon-cyan), 0 0 6px var(--color-neon-cyan);
+  --glow-pink: 0 0 3px var(--color-neon-pink), 0 0 6px var(--color-neon-pink);
+  --glow-green: 0 0 3px var(--color-neon-green), 0 0 6px var(--color-neon-green);
+  --glow-orange: 0 0 3px var(--color-neon-orange), 0 0 6px var(--color-neon-orange);
 
   /* Transitions */
   --transition-fast: 0.2s ease-out;
@@ -486,8 +486,9 @@ body {
 }
 
 .skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px var(--color-neon-purple), 0 0 30px rgba(136, 0, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-neon-cyan);
 }
 
 .skill-icon {
@@ -597,8 +598,9 @@ body {
 }
 
 .experience-card:hover {
-  transform: translateX(10px);
-  box-shadow: var(--glow-green), 0 0 30px rgba(0, 255, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-neon-cyan);
 }
 
 .experience-badge {
@@ -705,8 +707,9 @@ body {
 }
 
 .education-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--glow-cyan), 0 0 25px rgba(0, 136, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-neon-cyan);
 }
 
 .education-icon {
@@ -777,8 +780,9 @@ body {
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px var(--color-neon-pink), 0 0 30px rgba(255, 0, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-neon-cyan);
 }
 
 .project-header {
@@ -856,8 +860,9 @@ body {
 }
 
 .language-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-cyan);
+  border-color: var(--color-neon-cyan);
 }
 
 .language-name {
@@ -1014,7 +1019,7 @@ body {
   }
 
   .experience-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-2px);
   }
 
   .footer-content {
