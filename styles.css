@@ -662,6 +662,11 @@ body {
   color: var(--color-text-secondary);
 }
 
+/* Match 'How We Work' bullets font to experience bullets without terminal arrow */
+#agency .achievement-list li {
+  font-family: var(--font-family-mono);
+}
+
 .achievement-list li::before {
   content: "▶";
   position: absolute;
