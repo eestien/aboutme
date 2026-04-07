@@ -9,28 +9,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
   :root {
-    --bg: #0d0f0e;
-    --surface: #131614;
-    --surface2: #1a1d1b;
-    --border: rgba(255,255,255,0.07);
-    --border-accent: rgba(180,255,180,0.2);
-    --text: #e8ede9;
-    --muted: #7a8a7c;
-    --hint: #4a574c;
-    --accent: #b4ffb4;
-    --accent2: #7dffc0;
-    --accent-dim: rgba(180,255,180,0.08);
-    --accent-mid: rgba(180,255,180,0.15);
-    --tag-gen-bg: rgba(180,255,180,0.1);
-    --tag-gen-text: #b4ffb4;
-    --tag-nlp-bg: rgba(125,255,192,0.1);
-    --tag-nlp-text: #7dffc0;
-    --tag-bench-bg: rgba(255,220,100,0.08);
-    --tag-bench-text: #ffd864;
-    --tag-plat-bg: rgba(255,160,100,0.08);
-    --tag-plat-text: #ffaa6e;
-    --tag-agency-bg: rgba(160,140,255,0.1);
-    --tag-agency-text: #c0b4ff;
+    --bg: #0e0c14;
+    --surface: #141121;
+    --surface2: #1a1630;
+    --border: rgba(255,255,255,0.075);
+    --border-accent: rgba(196,168,255,0.22);
+    --text: #efeaff;
+    --muted: #a79cbc;
+    --hint: #6f6285;
+    --accent: #c4a8ff;
+    --accent2: #a8c4ff;
+    --accent-dim: rgba(196,168,255,0.09);
+    --accent-mid: rgba(196,168,255,0.16);
+    --tag-gen-bg: rgba(196,168,255,0.12);
+    --tag-gen-text: #c4a8ff;
+    --tag-nlp-bg: rgba(168,196,255,0.12);
+    --tag-nlp-text: #a8c4ff;
+    --tag-bench-bg: rgba(255,214,160,0.10);
+    --tag-bench-text: #ffd6a0;
+    --tag-plat-bg: rgba(255,175,210,0.10);
+    --tag-plat-text: #ffafd2;
+    --tag-agency-bg: rgba(196,168,255,0.12);
+    --tag-agency-text: #d8c6ff;
     --mono: 'DM Mono', monospace;
     --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'DM Sans', sans-serif;
@@ -42,7 +42,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     min-height: 100vh;
   }
@@ -71,7 +71,7 @@
 
   .header-eyebrow {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.14em;
     color: var(--accent);
     text-transform: uppercase;
@@ -99,7 +99,8 @@
     flex-shrink: 0;
   }
 
-  .profile-photo-wrap img {
+  .profile-photo-wrap img,
+  .profile-photo-container img {
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -109,7 +110,8 @@
     filter: grayscale(10%);
   }
 
-  .profile-photo-wrap .photo-ring {
+  .profile-photo-wrap .photo-ring,
+  .profile-photo-container .photo-ring {
     position: absolute;
     inset: -4px;
     border-radius: 50%;
@@ -125,7 +127,7 @@
 
   .hero-info h1 {
     font-family: var(--serif);
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2.15rem, 5vw, 3.2rem);
     font-weight: 400;
     line-height: 1.15;
     color: var(--text);
@@ -135,7 +137,7 @@
 
   .hero-title-badge {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.08em;
     color: var(--accent);
     background: var(--accent-dim);
@@ -201,9 +203,9 @@
   /* ── SECTION HEADERS ── */
   .section-label {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.14em;
-    color: var(--accent);
+    color: var(--hint);
     text-transform: uppercase;
     margin-bottom: 1.5rem;
     display: flex;
@@ -550,7 +552,7 @@
 
   .project-title {
     font-family: var(--serif);
-    font-size: 1.15rem;
+    font-size: 1.45rem;
     font-weight: 400;
     color: var(--text);
     line-height: 1.35;
@@ -558,7 +560,7 @@
 
   .tag {
     font-family: var(--mono);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.07em;
     padding: 4px 10px;
     border-radius: 100px;
