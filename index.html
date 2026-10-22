@@ -1,1192 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stefan Neymark — Portfolio</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stefan Neymark – ML Engineer & Researcher</title>
+<meta name="description" content="ML engineer and researcher: deep learning on biomedical data, computer vision and LLM systems, from research question to production.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0e0c14;
-    --surface: #141121;
-    --surface2: #1a1630;
-    --border: rgba(255,255,255,0.075);
-    --border-accent: rgba(196,168,255,0.22);
-    --text: #efeaff;
-    --muted: #a79cbc;
-    --hint: #6f6285;
-    --accent: #c4a8ff;
-    --accent2: #a8c4ff;
-    --accent-dim: rgba(196,168,255,0.09);
-    --accent-mid: rgba(196,168,255,0.16);
-    --tag-gen-bg: rgba(196,168,255,0.12);
-    --tag-gen-text: #c4a8ff;
-    --tag-nlp-bg: rgba(168,196,255,0.12);
-    --tag-nlp-text: #a8c4ff;
-    --tag-bench-bg: rgba(255,214,160,0.10);
-    --tag-bench-text: #ffd6a0;
-    --tag-plat-bg: rgba(255,175,210,0.10);
-    --tag-plat-text: #ffafd2;
-    --tag-agency-bg: rgba(196,168,255,0.12);
-    --tag-agency-text: #d8c6ff;
-    --mono: 'DM Mono', monospace;
-    --serif: 'Instrument Serif', Georgia, serif;
-    --sans: 'DM Sans', sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* NOISE TEXTURE */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    background-size: 200px;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.6;
-  }
-
-  .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 2rem 6rem; }
-
-  /* ── HERO HEADER ── */
-  .hero {
-    padding: 3.5rem 0 3rem;
-    border-bottom: 0.5px solid var(--border);
-    margin-bottom: 2.5rem;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .header-eyebrow {
-    font-family: var(--mono);
-    font-size: 14px;
-    letter-spacing: 0.14em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .header-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
-
-  .hero-profile {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    margin-bottom: 1.75rem;
-  }
-
-  .profile-photo-wrap {
-    flex-shrink: 0;
-  }
-
-  .profile-photo-wrap img,
-  .profile-photo-container img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1.5px solid var(--border-accent);
-    display: block;
-    filter: grayscale(10%);
-  }
-
-  .profile-photo-wrap .photo-ring,
-  .profile-photo-container .photo-ring {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 0.5px solid var(--accent-mid);
-    pointer-events: none;
-  }
-
-  .profile-photo-container {
-    position: relative;
-    width: 90px;
-    height: 90px;
-  }
-
-  .hero-info h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.15rem, 5vw, 3.2rem);
-    font-weight: 400;
-    line-height: 1.15;
-    color: var(--text);
-    margin-bottom: 0.4rem;
-  }
-  .hero-info h1 em { font-style: italic; color: var(--accent); }
-
-  .hero-title-badge {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    background: var(--accent-dim);
-    border: 0.5px solid var(--border-accent);
-    border-radius: 100px;
-    padding: 4px 12px;
-    display: inline-block;
-    margin-bottom: 0.75rem;
-    text-transform: uppercase;
-  }
-
-  .hero-description {
-    font-size: 14px;
-    color: var(--muted);
-    max-width: 540px;
-    line-height: 1.7;
-  }
-
-  .contact-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    margin-top: 1.25rem;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-  }
-  .contact-item i { color: var(--hint); font-size: 12px; }
-  .contact-item a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .contact-item a:hover { color: var(--accent); }
-
-  .stats-row {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-top: 1.75rem;
-    padding-top: 1.5rem;
-    border-top: 0.5px solid var(--border);
-  }
-  .stat { display: flex; flex-direction: column; gap: 2px; }
-  .stat-n {
-    font-family: var(--mono);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--text);
-    letter-spacing: -0.02em;
-  }
-  .stat-l { font-size: 11px; color: var(--hint); letter-spacing: 0.04em; }
-  .stat-divider {
-    width: 0.5px;
-    background: var(--border);
-    align-self: stretch;
-    margin: 0 0.5rem;
-  }
-
-  /* ── SECTION HEADERS ── */
-  .section-label {
-    font-family: var(--mono);
-    font-size: 14px;
-    letter-spacing: 0.14em;
-    color: var(--hint);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: fadeUp 0.6s ease both;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 0.5px;
-    background: var(--border);
-  }
-
-  /* ── ABOUT SECTION ── */
-  .about-section {
-    margin-bottom: 3rem;
-    animation: fadeUp 0.6s 0.05s ease both;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 1rem;
-  }
-
-  .about-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-  }
-
-  .about-card h3 {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    color: var(--hint);
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
-
-  .about-card p, .about-card ul {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-
-  .about-card ul {
-    padding-left: 1rem;
-  }
-
-  .about-card ul li {
-    margin-bottom: 4px;
-  }
-
-  .about-full {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 12px;
-  }
-  .about-full p {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-  .about-full p + p { margin-top: 0.75rem; }
-
-  /* ── SKILLS ── */
-  .skills-section { margin-bottom: 3rem; animation: fadeUp 0.6s 0.08s ease both; }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-  }
-
-  .skill-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    transition: border-color 0.25s;
-  }
-  .skill-card:hover { border-color: var(--border-accent); }
-
-  .skill-card h3 {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--hint);
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .skill-card h3 i { color: var(--accent); font-size: 11px; }
-
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-  .skill-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    padding: 3px 8px;
-    background: var(--accent-dim);
-    border: 0.5px solid var(--border-accent);
-    border-radius: 100px;
-    color: var(--accent);
-  }
-
-  /* ── EXPERIENCE ── */
-  .experience-section { margin-bottom: 3rem; animation: fadeUp 0.6s 0.1s ease both; }
-
-  .exp-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.4rem 1.75rem;
-    margin-bottom: 10px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.25s, background 0.25s;
-  }
-  .exp-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-mid), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .exp-card:hover { border-color: var(--border-accent); background: var(--surface2); }
-  .exp-card:hover::before { opacity: 1; }
-
-  .exp-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .exp-title {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--text);
-  }
-
-  .exp-badge {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    padding: 3px 10px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 0.5px solid var(--border-accent);
-    flex-shrink: 0;
-  }
-
-  .exp-company {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.04em;
-    margin-bottom: 2px;
-  }
-
-  .exp-date {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--hint);
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
-  }
-
-  .exp-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .exp-list li {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.55;
-    padding-left: 1rem;
-    position: relative;
-  }
-  .exp-list li::before {
-    content: '·';
-    position: absolute;
-    left: 0;
-    color: var(--hint);
-  }
-  .exp-list a {
-    color: var(--accent);
-    text-decoration: none;
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    margin-left: 6px;
-  }
-  .exp-list a:hover { opacity: 1; }
-
-  /* ── EDUCATION ── */
-  .education-section { margin-bottom: 3rem; animation: fadeUp 0.6s 0.12s ease both; }
-
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .edu-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    transition: border-color 0.25s;
-  }
-  .edu-card:hover { border-color: var(--border-accent); }
-
-  .edu-icon {
-    color: var(--accent);
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    opacity: 0.7;
-  }
-
-  .edu-card h3 {
-    font-family: var(--serif);
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .edu-degree {
-    font-size: 12.5px;
-    color: var(--muted);
-    margin-bottom: 3px;
-  }
-  .edu-date {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--hint);
-  }
-
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-    animation: fadeUp 0.6s 0.14s ease both;
-  }
-
-  .filter-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    padding: 6px 14px;
-    border-radius: 100px;
-    border: 0.5px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-  }
-  .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-  .filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
-
-  /* ── CATEGORY ── */
-  .category { margin-bottom: 3rem; animation: fadeUp 0.6s ease both; }
-
-  .category-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.25rem;
-  }
-  .category-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--hint);
-    letter-spacing: 0.06em;
-  }
-  .category-name {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .category-line { flex: 1; height: 0.5px; background: var(--border); }
-
-  /* ── PROJECT CARD ── */
-  .project-card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 12px;
-    transition: border-color 0.25s ease, background 0.25s ease;
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-mid), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .project-card:hover { border-color: var(--border-accent); background: var(--surface2); }
-  .project-card:hover::before { opacity: 1; }
-
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 10px;
-  }
-
-  .project-title {
-    font-family: var(--serif);
-    font-size: 1.45rem;
-    font-weight: 400;
-    color: var(--text);
-    line-height: 1.35;
-  }
-
-  .tag {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.07em;
-    padding: 4px 10px;
-    border-radius: 100px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    text-transform: uppercase;
-  }
-  .tag-gen   { background: var(--tag-gen-bg);    color: var(--tag-gen-text);    border: 0.5px solid rgba(180,255,180,0.2); }
-  .tag-nlp   { background: var(--tag-nlp-bg);    color: var(--tag-nlp-text);    border: 0.5px solid rgba(125,255,192,0.2); }
-  .tag-bench { background: var(--tag-bench-bg);  color: var(--tag-bench-text);  border: 0.5px solid rgba(255,220,100,0.2); }
-  .tag-plat  { background: var(--tag-plat-bg);   color: var(--tag-plat-text);   border: 0.5px solid rgba(255,160,100,0.2); }
-  .tag-agency{ background: var(--tag-agency-bg); color: var(--tag-agency-text); border: 0.5px solid rgba(160,140,255,0.2); }
-
-  .deliverable {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.65;
-    margin-bottom: 1rem;
-  }
-
-  .fields-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 8px;
-    margin-bottom: 1rem;
-  }
-
-  .field {
-    background: rgba(255,255,255,0.03);
-    border: 0.5px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-  }
-  .field-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    color: var(--hint);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .field-val { font-size: 12px; color: var(--muted); line-height: 1.45; }
-  .field-val strong { color: var(--text); font-weight: 400; }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding-top: 1rem;
-    border-top: 0.5px solid var(--border);
-    flex-wrap: wrap;
-  }
-
-  .pub-ref {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--hint);
-    letter-spacing: 0.02em;
-  }
-  .pub-ref span { color: var(--accent); }
-  .pub-ref a { color: var(--accent); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
-  .pub-ref a:hover { opacity: 1; }
-
-  /* ── LANGUAGES ── */
-  .languages-section { margin-bottom: 3rem; animation: fadeUp 0.6s 0.15s ease both; }
-  .languages-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .language-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 12px;
-    padding: 0.75rem 1.25rem;
-    min-width: 120px;
-    transition: border-color 0.25s;
-  }
-  .language-item:hover { border-color: var(--border-accent); }
-  .language-name {
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--text);
-  }
-  .proficiency {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 100px;
-    width: fit-content;
-  }
-  .proficiency.native     { background: var(--tag-gen-bg); color: var(--tag-gen-text); border: 0.5px solid rgba(180,255,180,0.2); }
-  .proficiency.professional { background: var(--tag-nlp-bg); color: var(--tag-nlp-text); border: 0.5px solid rgba(125,255,192,0.2); }
-  .proficiency.beginner   { background: var(--accent-dim); color: var(--hint); border: 0.5px solid var(--border); }
-
-  /* ── FOOTER ── */
-  footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-name {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--hint);
-    letter-spacing: 0.06em;
-  }
-  .footer-links { display: flex; gap: 1rem; align-items: center; }
-  .footer-links a { color: var(--hint); font-size: 14px; text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--accent); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .category:nth-child(1) { animation-delay: 0.1s; }
-  .category:nth-child(2) { animation-delay: 0.2s; }
-  .category:nth-child(3) { animation-delay: 0.3s; }
-  .category:nth-child(4) { animation-delay: 0.35s; }
-
-  .project-card { animation: fadeUp 0.5s ease both; }
-  .category:nth-child(1) .project-card:nth-child(1) { animation-delay: 0.15s; }
-  .category:nth-child(1) .project-card:nth-child(2) { animation-delay: 0.22s; }
-  .category:nth-child(1) .project-card:nth-child(3) { animation-delay: 0.29s; }
-  .category:nth-child(2) .project-card:nth-child(1) { animation-delay: 0.36s; }
-  .category:nth-child(2) .project-card:nth-child(2) { animation-delay: 0.43s; }
-  .category:nth-child(3) .project-card:nth-child(1) { animation-delay: 0.50s; }
-  .category:nth-child(3) .project-card:nth-child(2) { animation-delay: 0.57s; }
-  .category:nth-child(4) .project-card:nth-child(1) { animation-delay: 0.62s; }
-  .category:nth-child(4) .project-card:nth-child(2) { animation-delay: 0.67s; }
-
-  .project-card.hidden { display: none; }
-
-  @media (max-width: 640px) {
-    .wrap { padding: 0 1.25rem 4rem; }
-    .hero-profile { flex-direction: column; gap: 1.25rem; }
-    .hero-info h1 { font-size: 1.85rem; }
-    .fields-grid { grid-template-columns: 1fr 1fr; }
-    .card-top { flex-direction: column; }
-    .about-grid { grid-template-columns: 1fr; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .stats-row { gap: 1rem; }
-    .stat-divider { display: none; }
-  }
+:root{
+  --bg:#F2F6F8; --surface:#E7EEF2; --ink:#13202A; --muted:#566673; --line:#D0DAE1; --accent:#0B6E78; --accent-ink:#fff;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0E171D;--surface:#15222B;--ink:#E6EEF2;--muted:#9AABB6;--line:#26363F;--accent:#4FC3CF;--accent-ink:#0E171D;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#0E171D;--surface:#15222B;--ink:#E6EEF2;--muted:#9AABB6;--line:#26363F;--accent:#4FC3CF;--accent-ink:#0E171D;color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:60rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;letter-spacing:-.02em}
+
+/* Nav */
+nav{display:flex;justify-content:flex-end;gap:1.5rem;padding:1.25rem 0;font-size:.95rem}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 12rem;gap:3rem;align-items:center;padding:3rem 0 2.5rem}
+.hero h1{font-size:clamp(3rem,8vw,5.5rem);font-weight:700}
+.role{font-family:var(--display);font-size:1.35rem;font-weight:500;margin:1rem 0 0;color:var(--accent)}
+.lede{max-width:38rem;margin:1.25rem 0 0;color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.btn{display:inline-block;padding:.6rem 1.1rem;border:1.5px solid var(--ink);border-radius:.4rem;color:var(--ink);text-decoration:none;font-weight:500;font-size:.98rem}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.1);background:var(--accent);color:var(--accent-ink)}
+.avatar{width:12rem;height:12rem;border-radius:50%;object-fit:cover;background:var(--surface);border:1px solid var(--line);display:block}
+
+/* Methylation strip: the one memorable element */
+.strip{display:grid;grid-template-columns:repeat(72,1fr);gap:3px;margin:0 0 .75rem}
+.strip i{aspect-ratio:1;background:var(--accent);border-radius:1px}
+@media (prefers-reduced-motion:no-preference){
+  .strip i{animation:cell .6s ease-out backwards;animation-delay:calc(var(--c) * 18ms)}
+  @keyframes cell{from{opacity:0}}
+}
+.strip-note{font-size:.85rem;color:var(--muted);margin:0 0 .5rem}
+
+/* Sections */
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+section>.wrap>h2{font-size:2rem;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:11rem 1fr;gap:1rem 2.5rem}
+.grid>.when{color:var(--muted);font-size:.95rem;padding-top:.3rem}
+
+.work{list-style:none;margin:0;padding:0}
+.work li{padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.work li:first-child{padding-top:0}
+.work li:last-child{border-bottom:0;padding-bottom:0}
+.work h3{font-size:1.4rem;margin-bottom:.35rem}
+.work p{margin:0;max-width:42rem}
+.work .tag{display:inline-block;margin-top:.5rem;font-size:.92rem}
+
+.job{padding-bottom:2.5rem}
+.job h3{font-size:1.3rem}
+.job .org{color:var(--muted);margin:.15rem 0 .75rem}
+.job ul{margin:0;padding-left:1.1rem;max-width:44rem}
+.job li{margin-bottom:.55rem}
+.job li::marker{color:var(--accent)}
+
+dl.skills{margin:0}
+dl.skills dt{font-family:var(--display);font-weight:500;font-size:1.05rem}
+dl.skills dd{margin:.1rem 0 1.25rem;color:var(--muted);max-width:44rem}
+
+footer{border-top:1px solid var(--line);padding:3rem 0 4rem}
+footer p{margin:.25rem 0;color:var(--muted)}
+footer .mail{font-family:var(--display);font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;color:var(--ink);text-decoration-color:var(--accent);word-break:break-all}
+
+@media (max-width:42rem){
+  .hero{grid-template-columns:1fr;gap:1.75rem}
+  .avatar{order:-1;width:8rem;height:8rem}
+  .grid{grid-template-columns:1fr;gap:.25rem}
+  .strip{grid-template-columns:repeat(36,1fr)}
+  .strip i:nth-child(n+37){display:none}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <nav aria-label="Primary">
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <!-- ══ HERO ══ -->
   <header class="hero">
-    <p class="header-eyebrow">AI & ML Portfolio · Since 2018</p>
-
-    <div class="hero-profile">
-      <div class="profile-photo-container">
-        <img src="profile.jpg" alt="Stefan Neymark">
-        <div class="photo-ring"></div>
-      </div>
-      <div class="hero-info">
-        <h1>Stefan <em>Neymark</em></h1>
-        <div class="hero-title-badge">ML Research Engineer at Insilico Medicine</div>
-
-        <div class="contact-row">
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Tel Aviv, Israel</span>
-          </div>
-          <div class="contact-item">
-            <i class="fab fa-linkedin"></i>
-            <a href="https://www.linkedin.com/in/stefan-neymark-ba9a87236/" target="_blank">LinkedIn</a>
-          </div>
-          <div class="contact-item">
-            <i class="fab fa-x-twitter"></i>
-            <a href="https://x.com/stefan_neymark" target="_blank">X / Twitter</a>
-          </div>
-        </div>
+    <div>
+      <h1>Stefan Neymark</h1>
+      <p class="role">ML engineer and researcher</p>
+      <p class="lede">I have spent 8+ years in deep learning across biomedical data, computer vision and LLM systems. I take projects from an open research question to production: proposals, datasets, distributed training, benchmarks and containerized delivery with documented handoff.</p>
+      <div class="links">
+        <a class="btn primary" href="mailto:stefan.neymark@gmail.com">Email me</a>
+        <!-- TODO: replace # with your real URLs -->
+        <a class="btn" href="https://www.linkedin.com/in/stefan-neymark-ba9a87236/" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://scholar.google.com/citations?user=stefan-neymark" rel="noopener">Google Scholar</a>
       </div>
     </div>
+    <img class="avatar" src="profile.jpg" alt="Portrait of Stefan Neymark" width="192" height="192">
+  </header>
 
-
-  <!-- ══ ABOUT ══ -->
-  <section class="about-section">
-    <p class="section-label">About</p>
-
-    <div class="about-full">
-      <p>Nice to meet you here! I'm Stefan, a Machine Learning Engineer. Since 2018 I've been building and shipping machine learning systems and hold a Master's degree in Big Data and Machine Learning from ITMO University.</p>
-    </div>
-
-  </section>
-
-  <!-- ══ SKILLS ══ -->
-  <section class="skills-section">
-    <p class="section-label">Technical Skills</p>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3><i class="fas fa-code"></i> Core Technologies</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">GPU distributed computing</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3><i class="fas fa-brain"></i> Machine Learning</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">NLP</span>
-          <span class="skill-tag">LLM</span>
-          <span class="skill-tag">AE/VAE</span>
-          <span class="skill-tag">PEFT</span>
-          <span class="skill-tag">Computer Vision 2D</span>
-          <span class="skill-tag">LLM Quantization</span>
-          <span class="skill-tag">RLHF / GRPO</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3><i class="fas fa-robot"></i> AI Tools &amp; Frameworks</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">llama.cpp</span>
-          <span class="skill-tag">ollama</span>
-          <span class="skill-tag">LangChain</span>
-          <span class="skill-tag">CrewAI</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <h3><i class="fas fa-cloud"></i> Dev &amp; Cloud</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">API Development</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">AWS</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ EXPERIENCE ══ -->
-  <section class="experience-section">
-    <p class="section-label">Professional Experience</p>
-
-
-    <div class="exp-card">
-      <div class="exp-top">
-        <span class="exp-title">Machine Learning Researcher</span>
-        <span class="exp-badge">Current</span>
-      </div>
-      <div class="exp-company">Insilico Medicine</div>
-      <div class="exp-date">August 2020 – Present</div>
-      <ul class="exp-list">
-        <li>Developed and deployed multimodal deep learning models integrating natural text, images, KGs, and bio/chemical data. <a href="https://huggingface.co/insilicomedicine/precious3-gpt-multi-modal" target="_blank">↗ Project</a></li>
-        <li>Trained LMs from scratch and fine-tuned LLMs for text generation, summarization, and conversational AI using distributed GPU computing. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10564439/" target="_blank">↗ Publication</a></li>
-        <li>Reinforcement Learning (RLHF) for LLMs to enhance reasoning abilities.</li>
-        <li>Resource-effective LLM deployment on local machines with limited resources.</li>
-        <li>Generated synthetic data using Transformer models and VAEs. <a href="https://www.nature.com/articles/s41514-024-00163-3" target="_blank">↗ Publication</a></li>
-        <li>Built pipelines for model benchmarking and multi-agent systems with RAG tooling.</li>
-        <li>Implemented representation learning techniques and explainability frameworks.</li>
-        <li>Conducted graph representation learning and walk-based methods.</li>
-        <li>Contributed to COVIDomic — a multi-omics cloud platform for COVID-19 patient data analysis. <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009183" target="_blank">↗ Publication</a></li>
-      </ul>
-    </div>
-
-    <div class="exp-card">
-      <div class="exp-top">
-        <span class="exp-title">AI Founding Engineer</span>
-      </div>
-      <div class="exp-company">Construction Tech · Kamai.io</div>
-      <div class="exp-date">August 2025 – January 2026</div>
-      <ul class="exp-list">
-        <li>Computer vision for construction workflows: blueprint parsing, segmentation, and layout understanding to extract structural entities, measurements, and annotations.</li>
-      </ul>
-    </div>
-
-    <div class="exp-card">
-      <div class="exp-top">
-        <span class="exp-title">Machine Learning Researcher</span>
-      </div>
-      <div class="exp-company">National Center for Cognitive Research · ITMO University</div>
-      <div class="exp-date">December 2021 – June 2023</div>
-      <ul class="exp-list">
-        <li>Built and refined a knowledge graph from raw texts using state-of-the-art NLP models.</li>
-        <li>Developed an unsupervised method for knowledge graph refinement.</li>
-      </ul>
-    </div>
-
-    <div class="exp-card">
-      <div class="exp-top">
-        <span class="exp-title">Machine Learning Engineer</span>
-      </div>
-      <div class="exp-company">DDG Corp. · smartrealty.ai</div>
-      <div class="exp-date">October 2019 – June 2020</div>
-      <ul class="exp-list">
-        <li>Designed real estate price prediction and future sales forecasting models using classical machine learning techniques.</li>
-      </ul>
-    </div>
-
-    <div class="exp-card">
-      <div class="exp-top">
-        <span class="exp-title">ML Engineer</span>
-      </div>
-      <div class="exp-company">Private Client</div>
-      <div class="exp-date">2019</div>
-      <ul class="exp-list">
-        <li>Computer vision for license plate recognition for parking. Technologies: OpenCV, OCR.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ EDUCATION ══ -->
-  <section class="education-section">
-    <p class="section-label">Education</p>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-        <div>
-          <h3>ITMO University</h3>
-          <p class="edu-degree">Master's degree · Big Data &amp; Machine Learning</p>
-          <p class="edu-date">September 2021 – June 2023</p>
-        </div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-icon"><i class="fas fa-university"></i></div>
-        <div>
-          <h3>St. Petersburg Polytechnic University</h3>
-          <p class="edu-degree">Bachelor's degree · Engineering Management Science</p>
-          <p class="edu-date">September 2016 – January 2021</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PROJECTS ══ -->
-  <section>
-    <p class="section-label">Project Portfolio</p>
-
-    <!-- FILTER -->
-    <div class="filter-bar">
-      <button class="filter-btn active" data-filter="all">All projects</button>
-      <button class="filter-btn" data-filter="gen">Generative AI</button>
-      <button class="filter-btn" data-filter="nlp">NLP / target discovery</button>
-      <button class="filter-btn" data-filter="bench">Benchmarking</button>
-      <button class="filter-btn" data-filter="plat">Platform / MLOps</button>
-
-    </div>
-
-    <!-- CATEGORY 1 -->
-    <div class="category">
-      <div class="category-header">
-        <span class="category-num">01</span>
-        <span class="category-name">Generative AI model development</span>
-        <div class="category-line"></div>
-      </div>
-
-      <div class="project-card" data-cat="gen">
-        <div class="card-top">
-          <h2 class="project-title">Multi-omics synthetic data generation</h2>
-          <span class="tag tag-gen">Generative AI</span>
-        </div>
-        <p class="deliverable">Built Precious2GPT — a conditional diffusion model fused with a decoder-only multi-omics pretrained transformer (MoPT) to generate synthetic transcriptomic and DNA methylation datasets. Captures tissue- and age-specific biological patterns with generation capability extending beyond 120 years of age. Outperforms CGANs on age prediction accuracy using generated data.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Client need</p><p class="field-val">Train models without sharing proprietary omics data</p></div>
-          <div class="field"><p class="field-label">Modalities</p><p class="field-val"><strong>Transcriptomics</strong> + DNA methylation · multi-species · multi-tissue</p></div>
-          <div class="field"><p class="field-label">Key result</p><p class="field-val">Outperforms CGANs + standalone diffusion models on age prediction accuracy</p></div>
-          <div class="field"><p class="field-label">Unique capability</p><p class="field-val">Age-conditioned generation <strong>beyond 120 years</strong> — no real data equivalent</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">npj Aging · Aug 2024 · <span>22 citations · 29 Altmetric</span></span>
-          <span class="pub-ref">Precious2GPT · Sidorenko, Pushkov et al.</span>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="gen">
-        <div class="card-top">
-          <h2 class="project-title">Biological foundation model pre-training &amp; RLHF</h2>
-          <span class="tag tag-gen">Generative AI</span>
-        </div>
-        <p class="deliverable">Pre-trained and fine-tuned Longevity-LLM v0.1 (Qwen3-14B base) using supervised learning and reinforcement learning on four simultaneous omics modalities: DNA methylation, proteomics, RNA expression, and clinical biomarker data. Achieved 4.34-year MAE in epigenetic age prediction, surpassing the Horvath multi-tissue clock — the field's long-standing benchmark.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Model size</p><p class="field-val"><strong>14B parameters</strong> · Qwen3 base · custom fine-tuning stack</p></div>
-          <div class="field"><p class="field-label">Training data</p><p class="field-val">Methylation · proteomics · RNA · clinical biomarkers — simultaneously</p></div>
-          <div class="field"><p class="field-label">Benchmark result</p><p class="field-val"><strong>4.34-yr MAE</strong> epigenetic age · beats Horvath multi-tissue clock</p></div>
-          <div class="field"><p class="field-label">Training method</p><p class="field-val">Supervised pre-training + reinforcement learning (RLHF-style)</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">bioRxiv · March 2026 · <span>Insilico Medicine</span></span>
-          <span class="pub-ref">Longevity-LLM · Zhavoronkov, Pushkov et al.</span>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="gen">
-        <div class="card-top">
-          <h2 class="project-title">Multi-modal multi-task biological AI platform</h2>
-          <span class="tag tag-gen">Generative AI</span>
-        </div>
-        <p class="deliverable">Developed Precious3GPT — a single general-purpose biological foundation model combining textual, tabular, and knowledge-graph-derived omics representations. Handles six distinct tasks without per-task retraining: age prediction across species, drug sensitivity prediction, tissue/sex/disease classification, target discovery, and omics response simulation. Outperforms frontier LLMs on all biological tasks.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Architecture</p><p class="field-val">Text + tabular + knowledge graph · multi-species · multi-tissue</p></div>
-          <div class="field"><p class="field-label">Tasks delivered</p><p class="field-val"><strong>6 simultaneous tasks</strong> — one model, no per-task retraining</p></div>
-          <div class="field"><p class="field-label">Comparison</p><p class="field-val">Outperforms GPT-4 and domain-specific LLMs on biological benchmarks</p></div>
-          <div class="field"><p class="field-label">Partners</p><p class="field-val">Insilico Medicine · Harvard Medical School (Gladyshev lab)</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">bioRxiv · Jul 2024 · <span>Insilico Medicine / Harvard</span></span>
-          <span class="pub-ref">Precious3GPT · Galkin, Naumov, Pushkov et al.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CATEGORY 2 -->
-    <div class="category">
-      <div class="category-header">
-        <span class="category-num">02</span>
-        <span class="category-name">NLP &amp; AI for drug target discovery</span>
-        <div class="category-line"></div>
-      </div>
-
-      <div class="project-card" data-cat="nlp">
-        <div class="card-top">
-          <h2 class="project-title">LLM-powered therapeutic target identification from literature</h2>
-          <span class="tag tag-nlp">NLP / target discovery</span>
-        </div>
-        <p class="deliverable">Fine-tuned a domain-specific BioGPT model on a corpus of 900K+ biomedical grants to generate ranked therapeutic target hypotheses from disease prompts. Built an end-to-end pipeline: disease concept → token probability scoring → ranked gene target list. Identified CCR5 and PTH as novel dual-purpose aging targets — not previously recognized as age-related in the literature, but validated against database ground truth.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Model</p><p class="field-val">BioGPT fine-tuned on <strong>900K+ grant texts</strong> — domain-specific pre-training</p></div>
-          <div class="field"><p class="field-label">Pipeline</p><p class="field-val">Disease prompt → token probability → gene ranking → target validation</p></div>
-          <div class="field"><p class="field-label">Novel outputs</p><p class="field-val"><strong>CCR5 + PTH</strong> proposed as new dual-purpose anti-aging targets</p></div>
-          <div class="field"><p class="field-label">Validation</p><p class="field-val">Confirmed against established aging target databases</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">Aging (Albany NY) · Sep 2023 · <span>PMC10564439</span></span>
-          <span class="pub-ref">Zagirova, Pushkov et al. · DOI: 10.18632/aging.205055</span>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="nlp">
-        <div class="card-top">
-          <h2 class="project-title">Aging clock development with transfer learning</h2>
-          <span class="tag tag-nlp">Aging biomarkers</span>
-        </div>
-        <p class="deliverable">Built Precious1GPT — a multimodal transformer applying transfer learning across transcriptomic and DNA methylation data for biological age estimation. Also used for dual-purpose therapeutic target identification: surfacing genes simultaneously implicated in aging and specific age-related diseases. Demonstrated feature importance analysis linking molecular signatures to disease targets.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Input data</p><p class="field-val">Transcriptomics + DNA methylation + structured metadata</p></div>
-          <div class="field"><p class="field-label">Dual output</p><p class="field-val">Biological age estimate <strong>+</strong> ranked therapeutic target list</p></div>
-          <div class="field"><p class="field-label">Method</p><p class="field-val">Transfer learning · multimodal fusion · feature importance analysis</p></div>
-          <div class="field"><p class="field-label">Downstream use</p><p class="field-val">Foundation for Precious2GPT and Precious3GPT platform</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">Aging (Albany NY) · 2023</span>
-          <span class="pub-ref">Urban, Sidorenko, Zagirova, Kozlova, Kalashnikov, Pushkov et al.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CATEGORY 3 -->
-    <div class="category">
-      <div class="category-header">
-        <span class="category-num">03</span>
-        <span class="category-name">AI benchmarking &amp; cloud platform delivery</span>
-        <div class="category-line"></div>
-      </div>
-
-      <div class="project-card" data-cat="bench">
-        <div class="card-top">
-          <h2 class="project-title">AI model evaluation framework for aging biology (LongevityBench)</h2>
-          <span class="tag tag-bench">Benchmarking</span>
-        </div>
-        <p class="deliverable">Designed and delivered LongevityBench — a standardized multi-task benchmark suite for objectively evaluating whether AI models understand aging biology at a mechanistic level. Tasks span: human time-to-death prediction, mutation lifespan effects, age-dependent expression patterns, cancer survival, RNA- and proteome-based age estimation. Used to compare Longevity-LLM against all major frontier models including GPT-4.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Purpose</p><p class="field-val">Objective 3rd-party framework for evaluating biological AI claims</p></div>
-          <div class="field"><p class="field-label">Task coverage</p><p class="field-val">Time-to-death · lifespan mutations · age expression · cancer survival · omics age</p></div>
-          <div class="field"><p class="field-label">Models compared</p><p class="field-val">GPT-4, frontier LLMs, domain-specific models — open comparison</p></div>
-          <div class="field"><p class="field-label">CRO application</p><p class="field-val">Sell as independent AI vendor evaluation service to biotech clients</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">bioRxiv · Jan 2026 · <span>Insilico Medicine</span></span>
-          <span class="pub-ref">Zhavoronkov, Sidorenko, Naumov, Pushkov et al.</span>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="plat">
-        <div class="card-top">
-          <h2 class="project-title">Multi-omics cloud platform for disease risk stratification</h2>
-          <span class="tag tag-plat">Platform / MLOps</span>
-        </div>
-        <p class="deliverable">Built and deployed COVIDomic — a production cloud platform integrating metatranscriptomic, genomic, and epidemiological data streams for COVID-19 patient stratification. Included microbial community analysis, genetic epidemiology tools, patient severity scoring, and geographic strain origin inference. Designed as a reusable multi-omics data integration pattern for future infectious disease programs.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Platform type</p><p class="field-val">Cloud-native multi-omics data integration and analysis pipeline</p></div>
-          <div class="field"><p class="field-label">Data streams</p><p class="field-val">Metatranscriptomics · genomics · epidemiology · antibiotic resistance</p></div>
-          <div class="field"><p class="field-label">Outputs</p><p class="field-val">Patient severity score · strain origin · community profiling · risk factors</p></div>
-          <div class="field"><p class="field-label">Role</p><p class="field-val"><strong>Data curation · formal analysis · validation</strong></p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref">PLoS Computational Biology · Jul 2021</span>
-          <span class="pub-ref">Naumov, Putin, Pushkov et al. · DOI: 10.1371/journal.pcbi.1009183</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CATEGORY 4 -->
-    <div class="category">
-      <div class="category-header">
-        <span class="category-num">04</span>
-        <span class="category-name">Independent projects</span>
-        <div class="category-line"></div>
-      </div>
-
-      <div class="project-card" data-cat="agency">
-        <div class="card-top">
-          <h2 class="project-title">Clerivio — Smart Bank Statement Analysis</h2>
-          <span class="tag tag-agency">SaaS</span>
-        </div>
-        <p class="deliverable">Upload a PDF. Get interactive charts, insights, and money-saving suggestions. A production LLM + document parsing application delivered as a live SaaS product.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Year</p><p class="field-val">2025</p></div>
-          <div class="field"><p class="field-label">Stack</p><p class="field-val">LLM · PDF parsing · interactive data viz · SaaS deployment</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref"><a href="https://clerivio.com" target="_blank">clerivio.com ↗</a></span>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="agency">
-        <div class="card-top">
-          <h2 class="project-title">LegalAssistant.il — Legal RAG System</h2>
-          <span class="tag tag-agency">RAG</span>
-        </div>
-        <p class="deliverable">Retrieval-augmented generation system built on top of an Israeli legal knowledge base. Enables professionals and citizens to query legal documents using natural language.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Year</p><p class="field-val">2025</p></div>
-          <div class="field"><p class="field-label">Stack</p><p class="field-val">RAG pipeline · legal knowledge base · LLM · vector search</p></div>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="agency">
-        <div class="card-top">
-          <h2 class="project-title">Text2Image — Stable Diffusion for UI Layout Generation</h2>
-          <span class="tag tag-agency">GenAI</span>
-        </div>
-        <p class="deliverable">Fine-tuned Stable Diffusion on a custom dataset for automated UI layout generation. Enables design teams to rapidly prototype interface structures from text descriptions.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Year</p><p class="field-val">2023</p></div>
-          <div class="field"><p class="field-label">Stack</p><p class="field-val">Stable Diffusion · custom dataset · fine-tuning · diffusion models</p></div>
-        </div>
-      </div>
-
-      <div class="project-card" data-cat="agency">
-        <div class="card-top">
-          <h2 class="project-title">Audio Adversarial Attack on Voice Assistants</h2>
-          <span class="tag tag-agency">Research · CV/Audio</span>
-        </div>
-        <p class="deliverable">Implemented a real-world adversarial music attack targeting wake-word detection systems. Research project demonstrating vulnerabilities in production voice assistant pipelines.</p>
-        <div class="fields-grid">
-          <div class="field"><p class="field-label">Year</p><p class="field-val">2020</p></div>
-          <div class="field"><p class="field-label">Stack</p><p class="field-val">Adversarial ML · audio processing · wake-word detection</p></div>
-        </div>
-        <div class="card-footer">
-          <span class="pub-ref"><a href="https://github.com/eestien/VAD-Attack" target="_blank">github.com/eestien/VAD-Attack ↗</a></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ LANGUAGES ══ -->
-  <section class="languages-section">
-    <p class="section-label">Languages</p>
-    <div class="languages-grid">
-      <div class="language-item">
-        <span class="language-name">English</span>
-        <span class="proficiency professional">Professional</span>
-      </div>
-      <div class="language-item">
-        <span class="language-name">Russian</span>
-        <span class="proficiency native">Native</span>
-      </div>
-      <div class="language-item">
-        <span class="language-name">Hebrew</span>
-        <span class="proficiency beginner">Beginner</span>
-      </div>
-      <div class="language-item">
-        <span class="language-name">Chinese</span>
-        <span class="proficiency beginner">Beginner</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FOOTER ══ -->
-  <footer>
-    <span class="footer-name">STEFAN NEYMARK · ML Research Engineer · Tel Aviv</span>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/stefan-neymark-ba9a87236/" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://x.com/stefan_neymark" target="_blank"><i class="fab fa-x-twitter"></i></a>
-    </div>
-  </footer>
-
+  <div class="strip" id="strip" aria-hidden="true"></div>
+<!--   <p class="strip-note">Illustrative DNA methylation pattern, the kind of signal behind epigenetic age clocks.</p> -->
 </div>
 
+<section id="work">
+  <div class="wrap">
+    <h2>Selected work</h2>
+    <ul class="work">
+      <li>
+        <h3>Longevity-LLM</h3>
+        <p>Fine-tuned Qwen3 with multi-node distributed GPU training, a custom scheduler and MLflow tracking. It reaches a 4.34-year MAE in epigenetic age prediction and beats the Horvath multi-tissue clock.</p>
+        <a class="tag" href="https://doi.org/10.1016/j.cell.2026.08.026">Read the publication</a>
+      </li>
+      <li>
+        <h3>Precious3GPT</h3>
+        <p>A multimodal model that combines text, images, knowledge graphs and bio/chemical data. It covers age prediction, drug sensitivity, target discovery and omics simulation, and outperforms GPT-4 on biological benchmarks.</p>
+        <a class="tag" href="https://huggingface.co/insilicomedicine/precious3-gpt-multi-modal">View the project</a>
+      </li>
+      <li>
+        <h3>LongevityBench</h3>
+        <p>A standardized multi-task benchmark suite for AI models on biological aging tasks. I used it to compare Longevity-LLM with GPT-4 and other frontier models.</p>
+        <a class="tag" href="https://www.biorxiv.org/content/10.64898/2026.01.12.698650.abstract">Read the preprint</a>
+      </li>
+      <li>
+        <h3>Synthetic omics</h3>
+        <p>Transcriptomic and DNA methylation data generated by a conditional diffusion model fused with the multi-omics transformer Precious2GPT. It beats CGANs on age prediction accuracy.</p>
+        <a class="tag" href="https://www.nature.com/articles/s41514-024-00163-3">Read the publication</a>
+      </li>
+      <li>
+        <h3>Blueprint analysis at Kamai.io</h3>
+        <p>An end-to-end computer vision pipeline for construction blueprints: segmentation, layout understanding and OCR-based extraction of annotations.</p>
+      </li>
+      <li>
+        <h3>COVIDomic</h3>
+        <p>A production multi-omics cloud platform for COVID-19 patient stratification.</p>
+        <a class="tag" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009183">Read the publication</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+
+    <article class="job grid">
+      <div class="when">Aug 2020 to present</div>
+      <div>
+        <h3>ML Engineer and Researcher</h3>
+        <p class="org">Insilico Medicine</p>
+        <ul>
+          <li>Work directly with external clients as an MLR / MLOps engineer: proposals and demos, dataset construction, model training, and delivery of containerized solutions with documentation for the clients’ dev teams.</li>
+          <li>Applied RLHF and GRPO to improve LLM reasoning on domain-specific tasks, with a 1.5–13% gain in biological domain awareness over the base model.</li>
+          <li>Built production multi-agent pipelines with RAG tooling.</li>
+          <li>Deployed quantized LLMs on resource-constrained hardware with llama.cpp and WebGPU.</li>
+          <li>Pretrained a language model for age-related disease target discovery, worked on graph representation learning, walk-based recommendations and explainability, and contributed to an agentic AI system for aging research. <a href="https://github.com/Insilico-org/longeclaw/tree/main">Repository</a></li>
+          <li>Articles are published under the name Stefan Neymark on <a href="https://scholar.google.com/citations?user=stefan-neymark">Google Scholar</a>.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job grid">
+      <div class="when">Aug 2025 to Jan 2026</div>
+      <div>
+        <h3>Founding AI Consultant</h3>
+        <p class="org">Kamai.io, construction tech</p>
+        <ul>
+          <li>Built an end-to-end computer vision pipeline for construction blueprint analysis: segmentation, layout understanding and OCR-based annotation extraction.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job grid">
+      <div class="when">Dec 2021 to Jun 2023</div>
+      <div>
+        <h3>ML Researcher</h3>
+        <p class="org">National Center for Cognitive Research, ITMO University</p>
+        <ul>
+          <li>Built and refined a knowledge graph from raw texts using NLP for named entity recognition and relation extraction. Developed an unsupervised graph refinement method and analyzed the resulting graph. <a href="https://eestien.github.io/msc-thesis-2023/">Presentation</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job grid">
+      <div class="when">Mar 2018 to Jun 2020</div>
+      <div>
+        <h3>ML Engineer</h3>
+        <p class="org">DDG corp. / smartrealty.ai</p>
+        <ul>
+          <li>Designed real estate price prediction and sales forecasting models with classical ML (gradient boosting, SVM).</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Deep learning and computer vision</dt>
+      <dd>PyTorch, image segmentation, layout understanding, OCR, transformers, diffusion models, CUDA, multi-node distributed training</dd>
+      <dt>MLOps and reproducibility</dt>
+      <dd>MLflow experiment tracking, Docker, Kubernetes, containerized delivery, AWS / GCP, SQL</dd>
+      <dt>LLMs</dt>
+      <dd>Fine-tuning (Qwen3), RLHF / GRPO, RAG and multi-agent pipelines, Hugging Face, quantized serving (llama.cpp, ollama, WebGPU)</dd>
+      <dt>Biomedical data and graphs</dt>
+      <dd>Multi-omics, DNA methylation, transcriptomics, knowledge graphs, graph representation learning, explainability</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="job grid">
+      <div class="when">Sep 2021 to Jun 2023</div>
+      <div>
+        <h3>M.Sc. Big Data and Machine Learning</h3>
+        <p class="org">ITMO University, St. Petersburg. <a href="https://eestien.github.io/msc-thesis-2023/">Thesis</a></p>
+      </div>
+    </div>
+    <div class="job grid" style="padding-bottom:0">
+      <div class="when">Sep 2016 to Jan 2021</div>
+      <div>
+        <h3>B.Sc. Engineering Management Science</h3>
+        <p class="org">Peter the Great St. Petersburg Polytechnic University</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 style="font-size:1.1rem;font-weight:500;color:var(--muted);margin-bottom:.75rem">Get in touch</h2>
+    <a class="mail" href="mailto:stefan.neymark@gmail.com">stefan.neymark@gmail.com</a>
+    <p style="margin-top:1rem">Based in Israel and open to on-site work in Tel Aviv.</p>
+  </div>
+</footer>
+
 <script>
-  const btns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.project-card');
-
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.dataset.filter;
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.cat === filter) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    });
-  });
+(function(){
+  var strip=document.getElementById('strip');
+  if(!strip) return;
+  // Seeded pseudo-random values so the pattern is the same on every visit.
+  var s=20260;
+  function rnd(){s=(s*1664525+1013904223)%4294967296;return s/4294967296}
+  var cols=72, rows=3, frag=document.createDocumentFragment();
+  for(var r=0;r<rows;r++){
+    for(var c=0;c<cols;c++){
+      var wave=0.5+0.35*Math.sin(c/5.5+r*1.3);
+      var v=Math.min(1,Math.max(0.06,wave*0.7+rnd()*0.45));
+      var el=document.createElement('i');
+      el.style.opacity=v.toFixed(2);
+      el.style.setProperty('--c',c);
+      frag.appendChild(el);
+    }
+  }
+  strip.appendChild(frag);
+})();
 </script>
 </body>
 </html>
